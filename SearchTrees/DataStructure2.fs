@@ -11,38 +11,19 @@ type SudokuProblemComplete(board : list<int>) =
     let getRegion r =
         let r = r - 1
         [
-        (List.nth board  (0+r))        ; (List.nth board  (1+r))       ; (List.nth board  (2+r))
-        (List.nth board ((0+r) + 9))   ; (List.nth board ((1+r) + 9))  ; (List.nth board ((2+r) + 9))
-        (List.nth board ((0+r) + 18))  ; (List.nth board ((1+r) + 18)) ; (List.nth board ((2+r) + 18))
+        (List.nth board  (0 + (r * 3)))        ; (List.nth board  (1+(r * 3)))       ; (List.nth board  (2+(r * 3)))
+        (List.nth board ((0 + (r * 3)) + 9))   ; (List.nth board ((1+(r * 3)) + 9))  ; (List.nth board ((2+(r * 3)) + 9))
+        (List.nth board ((0 + (r * 3)) + 18))  ; (List.nth board ((1+(r * 3)) + 18)) ; (List.nth board ((2+(r * 3)) + 18))
         ]
 
     let getRow r =
         let r = r - 1
-        [
-            List.nth board (0 + (r * 9)) 
-            List.nth board (1 + (r * 9))
-            List.nth board (2 + (r * 9))
-            List.nth board (3 + (r * 9))
-            List.nth board (4 + (r * 9))
-            List.nth board (5 + (r * 9))
-            List.nth board (6 + (r * 9))
-            List.nth board (7 + (r * 9))
-            List.nth board (8 + (r * 9))
-        ]
+        [for i in 0..8 -> List.nth board (i + r * 9)]
 
     let getCol c =
         let c = c - 1
-        [ 
-            List.nth board c
-            List.nth board (c + 9 * 1)
-            List.nth board (c + 9 * 2)
-            List.nth board (c + 9 * 3)
-            List.nth board (c + 9 * 4)
-            List.nth board (c + 9 * 5)
-            List.nth board (c + 9 * 6)
-            List.nth board (c + 9 * 7)
-            List.nth board (c + 9 * 8)
-        ]
+        [for i in 0..8 -> List.nth board (c + i * 9)] 
+
     
 
     let isIn lst i = 
@@ -57,6 +38,19 @@ type SudokuProblemComplete(board : list<int>) =
     let isInRegion r i =
         isIn r i
 
+    member this.PrintTests =
+        printfn "Regions"
+        for i in [1..9] do
+            printfn "%O" (getRegion i)
+        
+        printfn "Rows"
+        for i in [1..9] do
+            printfn "%O" (getRow i)
+
+        printfn "Cols"
+        for i in [1..9] do
+            printfn "%O" (getCol i)
+
 
 type SudokuNode(content : SudokuProblemComplete) =
 
@@ -67,7 +61,7 @@ type SudokuNode(content : SudokuProblemComplete) =
         false
 
     member this.getChildren = 
-        [content]
+        [ new SudokuNode(content) ]
 
     member this.equalTo other =
         false
