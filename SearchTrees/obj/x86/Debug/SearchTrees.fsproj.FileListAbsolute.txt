@@ -1,0 +1,11 @@
+E:\Source\F#\SearchTrees\SearchTrees\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\SearchTrees.XML
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\SearchTrees.exe
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\SearchTrees.pdb
+E:\Source\F#\SearchTrees\SearchTrees\obj\x86\Debug\SearchTrees.exe
+E:\Source\F#\SearchTrees\SearchTrees\obj\x86\Debug\SearchTrees.pdb
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\FsUnit.NUnit.dll
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.framework.dll
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.mocks.dll
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\pnunit.framework.dll
+E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.framework.xml
