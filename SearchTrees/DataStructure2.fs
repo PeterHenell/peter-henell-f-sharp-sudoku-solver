@@ -50,7 +50,9 @@ type SudokuProblemComplete(board : list<int>) =
         printfn "Cols"
         for i in [1..9] do
             printfn "%O" (getCol i)
-
+    
+    member this.Board = 
+        board
 
 type SudokuNode(content : SudokuProblemComplete) =
 
@@ -63,8 +65,8 @@ type SudokuNode(content : SudokuProblemComplete) =
     member this.getChildren = 
         [ new SudokuNode(content) ]
 
-    member this.equalTo other =
-        false
+    member this.equalTo (other : SudokuNode) =
+        content.Board = other.Content.Board
 
     member this.print =
         printfn "N/A"
