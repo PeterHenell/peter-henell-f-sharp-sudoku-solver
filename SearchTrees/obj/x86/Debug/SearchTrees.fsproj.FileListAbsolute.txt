@@ -9,3 +9,14 @@ E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.framework.dll
 E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.mocks.dll
 E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\pnunit.framework.dll
 E:\Source\F#\SearchTrees\SearchTrees\bin\Debug\nunit.framework.xml
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\SearchTrees.XML
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\SearchTrees.exe
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\SearchTrees.pdb
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\FsUnit.NUnit.dll
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\nunit.framework.dll
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\nunit.mocks.dll
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\pnunit.framework.dll
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\bin\Debug\nunit.framework.xml
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\obj\x86\Debug\SearchTrees.exe
+E:\Source\GitGoogleCode\FSudokuSolver\SearchTrees\obj\x86\Debug\SearchTrees.pdb

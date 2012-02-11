@@ -1,29 +1,24 @@
 ﻿module Solver
-open DataStructure
+open DataStructure2
 
 exception NoSolutionFound of string
-exception SolutionWasFound of Node
+exception SolutionWasFound of SudokuNode
 
 type Solver() =
 
     // Right now the internalSolve is not really recursive, it is more of a loop. Todo: Figure out a good way of making it use recursion in a smart way
-    member this.solve (rf: Node) =
-        let openNodes = []
-        let closedNodes = []
-        let nodes = []
-
-        let root = rf
-        let openNodes =  root :: openNodes
-    
-        let rec internalSolve (nodesToExamine : List<Node>)  = 
+    member this.solve (root: SudokuNode) =
+        let rec internalSolve (nodesToExamine : List<SudokuNode>) (closedNodes : List<SudokuNode>)  = 
             if nodesToExamine.Length = 0 then 
                raise (NoSolutionFound("Could not find solution even after " + closedNodes.Length.ToString() + " tries" ))
 
             let node = nodesToExamine.Head // pick up the node we are going to examine
-            let closedNodes = node :: closedNodes // add the node to the list of examined nodes
-            let nodesToExamine = nodesToExamine.Tail // remove the node from the list of active nodes
+            node.print
 
-            if (node.isGoal) then 
+           // let closedNodes = node :: closedNodes // add the node to the list of examined nodes
+            //let nodesToExamine =  // remove the node from the list of active nodes
+
+            if node.isGoal then 
                 node.print
                 raise(SolutionWasFound(node))
         
@@ -35,6 +30,6 @@ type Solver() =
 
             // add these nodes to the end of openNodes
             // add thse to the begining of openNodes to use bredth first search
-            internalSolve (nodes @ nodesToExamine)
+            internalSolve (nodes @ nodesToExamine.Tail) (node::closedNodes)
 
-        internalSolve openNodes
+        internalSolve (root :: []) []

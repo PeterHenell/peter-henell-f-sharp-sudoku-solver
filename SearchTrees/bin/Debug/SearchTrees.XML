@@ -56,6 +56,9 @@
 <member name="">
 
 </member>
+<member name="T:DataStructure2">
+
+</member>
 <member name="">
 
 </member>
@@ -113,6 +116,21 @@
 <member name="">
 
 </member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
 <member name="T:Program">
 
 </member>
@@ -137,40 +155,7 @@
 <member name="">
 
 </member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
-<member name="">
-
-</member>
 <member name="T:Solver">
-
-</member>
-<member name="T:SudokuProblemTests">
 
 </member>
 </members>

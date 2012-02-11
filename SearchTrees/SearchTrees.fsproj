@@ -39,10 +39,10 @@
   <ItemGroup>
     <Compile Include="DataStructure2.fs" />
     <Compile Include="DataStructure.fs" />
-    <Compile Include="Solver.fs" />
-    <None Include="packages.config" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Solver.fs" />
     <Compile Include="Program.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsUnit.NUnit">
