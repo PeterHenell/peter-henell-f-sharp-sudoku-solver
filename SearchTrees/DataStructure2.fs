@@ -6,21 +6,19 @@ type SudokuProblemComplete(board : list<int>) =
     // 1; 2; 3
     // 4; 5; 6
     // 7; 8; 9
-
-
-
     member this.getRegion r =
         let nb n = 
             List.nth board n
         
         let r = r - 1
 
+        // The starting position for every region
         let m = (((r / 3) * (3 * 9)) + ((r % 3) * 3))
         
         [
-        nb m       ; nb (  (m )+1)       ; nb ( (m ) + 2)
-        nb (m + 9)   ; nb ( ((m )+1 + 9))  ; nb (((m ) + 2 + 9))
-        nb (m + 18)  ; nb ( ((m )+1 + 18)) ; nb (((m ) + 2 + 18))
+        nb m         ; nb ( m + 1)      ; nb (m + 2)
+        nb (m + 9)   ; nb ( m + 1 + 9)  ; nb (m + 2 + 9)
+        nb (m + 18)  ; nb ( m + 1 + 18) ; nb (m + 2 + 18)
         ]
 
     member this.getRow r =
@@ -79,8 +77,7 @@ type SudokuNode(content : SudokuProblemComplete) =
         // For each element, we generate a list of elements that should
         // replace the original one - either singleton list or two elements
         // for the specified index
-        input |> List.mapi (fun i el -> if i = index then [newEl] else [el])
-        |> List.concat
+        input |> List.mapi (fun i el -> if i = index then newEl else el)
 
     member this.Content = 
         content
@@ -107,6 +104,7 @@ type SudokuNode(content : SudokuProblemComplete) =
             
         neww
 
+    // Nodes are equal if their underlying boards (arrays) are the same
     member this.equalTo (other : SudokuNode) =
         content.Board = other.Content.Board
 

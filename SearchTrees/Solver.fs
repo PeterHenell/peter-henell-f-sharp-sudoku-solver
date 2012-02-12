@@ -9,14 +9,11 @@ type Solver() =
     // Right now the internalSolve is not really recursive, it is more of a loop. Todo: Figure out a good way of making it use recursion in a smart way
     member this.solve (root: SudokuNode) =
         let rec internalSolve (nodesToExamine : List<SudokuNode>) (closedNodes : List<SudokuNode>)  = 
+            
             if nodesToExamine.Length = 0 then 
                raise (NoSolutionFound("Could not find solution even after " + closedNodes.Length.ToString() + " tries" ))
 
             let node = nodesToExamine.Head // pick up the node we are going to examine
-            node.print
-
-           // let closedNodes = node :: closedNodes // add the node to the list of examined nodes
-            //let nodesToExamine =  // remove the node from the list of active nodes
 
             if node.isGoal then 
                 node.print
