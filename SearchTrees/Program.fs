@@ -6,7 +6,7 @@ open Solver
  //We are throwing different kind of exceptions to handle failure and success.
  //Todo: Do not use exceptions lol
 
-let easy = [
+let easy = [|
     3;0;9;7;0;5;8;0;1;
     0;0;2;0;0;0;5;0;0;
     0;1;0;0;0;0;0;6;0;
@@ -16,7 +16,7 @@ let easy = [
     0;4;0;0;0;0;0;2;0;
     0;0;7;0;0;0;3;0;0;
     2;0;8;1;0;9;6;0;4;
-]
+|]
 
 
 let s = new Solver()
@@ -29,7 +29,7 @@ with
 
 printfn "ok, next"
 
-let hard = [
+let hard = [|
     0;0;5;0;3;4;0;0;0;
     0;0;6;7;0;0;3;0;0;
     0;0;0;9;0;0;0;7;2;
@@ -39,7 +39,7 @@ let hard = [
     2;5;0;0;0;8;0;0;0;
     0;0;7;0;0;6;1;0;0;
     0;0;0;4;9;0;7;0;0;
-]
+|]
 
 try
     let res = s.solve (new SudokuNode(new SudokuProblemComplete(hard) ))

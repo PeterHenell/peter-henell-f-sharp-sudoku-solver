@@ -1,6 +1,8 @@
 ﻿module DataStructure2
 
-type SudokuProblemComplete(board : list<int>) =
+open System.Threading.Tasks
+
+type SudokuProblemComplete(board : array<int>) =
     
     // Regions
     // 1; 2; 3
@@ -8,32 +10,32 @@ type SudokuProblemComplete(board : list<int>) =
     // 7; 8; 9
     member this.getRegion r =
         let nb n = 
-            List.nth board n
+            board.[n]
         
         let r = r - 1
 
         // The starting position for every region
         let m = (((r / 3) * (3 * 9)) + ((r % 3) * 3))
         
-        [
+        [|
         nb m         ; nb ( m + 1)      ; nb (m + 2)
         nb (m + 9)   ; nb ( m + 1 + 9)  ; nb (m + 2 + 9)
         nb (m + 18)  ; nb ( m + 1 + 18) ; nb (m + 2 + 18)
-        ]
+        |]
 
     member this.getRow r =
         let r = r - 1
-        [for i in 0..8 -> List.nth board (i + r * 9)]
+        [| for i in 0..8 -> board.[(i + r * 9)] |]
 
     member this.getCol c =
         let c = c - 1
-        [for i in 0..8 -> List.nth board (c + i * 9)] 
+        [| for i in 0..8 -> board.[(c + i * 9)] |] 
 
     
 
     member this.printTests =
         for i in 0..80 do
-            printf "%O ;" (List.nth board i )
+            printf "%O ;" (board.[ i ] )
             if (i + 1) % 9 = 0 then
                 printfn ""
         printfn ""    
@@ -42,7 +44,7 @@ type SudokuProblemComplete(board : list<int>) =
         board
 
     member this.findFreeSpot =
-        board |> List.findIndex(fun x -> x = 0) 
+        board |> Array.findIndex(fun x -> x = 0) 
 
     // from index number to Row/Column/region
     member this.indexToRCR i =
@@ -72,19 +74,17 @@ type SudokuProblemComplete(board : list<int>) =
 
 type SudokuNode(content : SudokuProblemComplete) =
 
-    // Based on example from here: http://stackoverflow.com/questions/2889961/f-insert-remove-item-from-list
     let replaceAt index newEl input =
-        // For each element, we generate a list of elements that should
-        // replace the original one - either singleton list or two elements
-        // for the specified index
-        input |> List.mapi (fun i el -> if i = index then newEl else el)
+        let ny = Array.copy input
+        ny.[index] <- newEl
+        ny
 
     member this.Content = 
         content
 
     member this.isGoal =
         // if all the slots are taken then we are at the goal
-        not (List.exists(fun x -> x = 0) content.Board)
+        not (Array.exists(fun x -> x = 0) content.Board)
 
     member this.getChildren = 
         // find the index of a free spot to place our next number
@@ -92,16 +92,25 @@ type SudokuNode(content : SudokuProblemComplete) =
         // get the row, column and region based on that index
         let (row, column, region) = content.indexToRCR freeSpot
 
+        
+        let p = Async.Parallel [
+                                async { return content.getRow row }
+                                async { return content.getCol column }
+                                async { return content.getRegion region }
+                                ]
+                |> Async.RunSynchronously
+                |> Array.concat
+         
         // Get all number between 1 and 9 that do not exists in the row nor column nor region
         let possible = 
-            (Set.ofList [1..9]) - Set.ofList( (content.getRow row) @ (content.getCol column) @ (content.getRegion region))
-            |> Set.toList
+            (Set.ofArray [|1..9|]) - Set.ofArray( p )
 
-        // Create a new list of sudokuNodes where all the elements are the same except the freeSpot replaced with one of the possible numbers
-        let neww =
-            possible
-            |> List.map(fun x -> new SudokuNode(new SudokuProblemComplete(replaceAt freeSpot x content.Board)))
-            
+        let neww = Async.Parallel [for i in possible -> 
+                                            async { 
+                                                return new SudokuNode(replaceAt freeSpot i content.Board)
+                                            } ]
+                |> Async.RunSynchronously
+
         neww
 
     // Nodes are equal if their underlying boards (arrays) are the same
@@ -110,3 +119,6 @@ type SudokuNode(content : SudokuProblemComplete) =
 
     member this.print =
         content.printTests
+    
+    new (content : array<int>) =
+        SudokuNode(new SudokuProblemComplete(content))
